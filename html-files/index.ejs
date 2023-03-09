@@ -1,0 +1,62 @@
+    <%- include('../partials/header.ejs') %>
+
+    <style>
+        #table{width: 500px;}    
+        th{text-align: left;}
+    </style>
+    <div class = "flex justify-center">
+        <table width = "1000" class = "font text-xl mr-20 font-semibold" >
+                <tr class = "border-solid bg-gray-400">
+                    <th > Name </th>
+                    <th > Contact</th>
+                    <th > Rent Fee</th>
+                    <th > Rent Due</th>
+                    <th > Rent Pay Status</th>
+                </tr>
+
+
+                <% if(data.length > 0){
+                    for (var i = 0; i < data.length; i++){
+                        %> <tr class = "border-solid">
+                            <td width = "250"><%= data[i].boarderName%></td>
+                            <td width = "250"><%= data[i].boarderContact%></td>
+                            <td width = "250"><%= data[i].boarderRent%></td>
+                            <td width = "250"><%= data[i].boarderRentDue%></td>
+                            <td width = "250"> 
+                                <form action = "" method = "post" >
+                                    <input type = "hidden" name = "index" value = "<%= data[i].id %>">
+                                    <select name = "payStatus">
+                                        <% if (data[i].boarderRentStatus == "Not Paid"){ %> <option value="Not Paid">Not Paid</option> <option value="Paid">Paid </option> <% } %>
+                                        <% if (data[i].boarderRentStatus == "Paid"){ %> <option value="Paid">Paid</option> <option value="Not Paid">Not Paid</option><% } %>
+                                    
+                                </select> <input class = "update" type = "submit"></form>
+                                
+                                </td>
+                            </tr>
+                <%   }
+                }  %> 
+        </table>
+    </div>
+    
+
+        <script>
+            const update = document.querySelector('input.update');
+            
+    
+            update.addEventListener('click', (e) =>{
+                let updateIndex = update.dataset.doc;
+                
+                fetch(updateIndex, {
+                    method: 'POST' 
+                }).then(() =>{ })
+                .catch((err) =>{
+                    console.log(err);
+                })
+            }
+        )
+            
+            
+        </script>
+
+    </body>
+    </html>
