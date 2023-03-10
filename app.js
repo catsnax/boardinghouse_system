@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-const Boarder = require('./models/boarder');
+const boarder = require('./models/newboarder');
+const originalBoarder = require('./models/boarder')
+
 
 const { redirect } = require('express/lib/response');
 
@@ -24,20 +26,35 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
     console.log(err);
 })
 
-
 app.get('/', (req, res) =>{
+    res.render('index');
+})
+
+app.post('/', (req, res) =>{
+    newString = req.body.month + req.body.year;
+    nameString = req.body.month + " " + req.body.year;
+    Boarder = boarder(newString);
+    Boarder = originalBoarder;
+    res.redirect('/display')
+})
+
+app.get('/display', (req, res) =>{
     Boarder.find()
     .then((result) =>{
-        res.render('index', {data : result});
+        res.render('display', {data : result, nameString : nameString});
     })
     .catch((err) =>{
         console.log(err);
     })
 })
 
+app.get('/create', (req, res) =>{
+    res.render('create');
+})
+
 //takes in the data from html forms and creates a new instance of Boarder which is new object of boarder in data using schema
 app.post('/create', (req, res) =>{
-    const newBoarder = new Boarder({
+    const newBoarder = new originalBoarder({
         boarderName : req.body.Name,
         boarderContact: req.body.Contact,
         boarderRent: req.body.rentFee,
@@ -46,6 +63,7 @@ app.post('/create', (req, res) =>{
         boarderWater: 0,
         boarderWaterStatus: "Not Paid",
         boarderElect: 0,
+        boarderElectPay: 0,
         boarderElectStatus: "Not Paid"
     });
 
@@ -54,7 +72,7 @@ app.post('/create', (req, res) =>{
         console.log(result);
     })
     .catch((err) => console.log(err));
-    res.redirect('/');
+    res.redirect('/create');
 })
 
 app.get('/edit', (req, res) =>{
@@ -70,23 +88,30 @@ app.get('/edit', (req, res) =>{
 
 app.post('/edit', (req, res) =>{
     const id = req.body.index;
-    Boarder.findById(id).then((result) =>{
-        console.log(req.body);
-        
-        result.boarderRentStatus = req.body.payStatus;
-        result.boarderWater = req.body.water;
-        result.boarderWaterStatus = req.body.waterStatus
-        result.boarderElect = req.body.elect;
-        result.boarderElectStatus = req.body.electStatus
+    Boarder.find().then((result) =>{
+        waterDivided = parseFloat(req.body.water) / result.length;
+        for(i = 0; i < result.length; i++){
+            result[i].boarderWater = waterDivided;
+            result[i].save().then(() =>{ }).catch((err) => {console.log(err)})
+        }
+    
+    })
 
+    Boarder.findById(id).then((result) =>{
+        result.boarderRentStatus = req.body.payStatus;
+        result.boarderElect = req.body.elect;
+        result.boarderElectPay = parseFloat(req.body.water) * 13;
+        result.boarderWaterStatus = req.body.waterStatus
+        result.boarderElectStatus = req.body.electStatus
         result.save().then(() =>{res.redirect('/edit');}).catch((err) => {console.log(err)})
         
     }
     ).catch((err) => {
         console.log(err);
     }) 
+
 })
 
-app.get('/create', (req, res) =>{
-    res.render('create');
-})
+
+
+module.exports = app;
