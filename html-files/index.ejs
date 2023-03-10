@@ -1,62 +1,62 @@
     <%- include('../partials/header.ejs') %>
 
     <style>
-        #table{width: 500px;}    
-        th{text-align: left;}
+        table{background-color: #84B6FF;}    
+        th{text-align: left; background-color: #3B93A1; color: white}
+        table,th,td{
+        border: 2px solid #06296D;
+        border-collapse: collapse;
+    }
     </style>
-    <div class = "flex justify-center">
-        <table width = "1000" class = "font text-xl mr-20 font-semibold" >
+
+    
+    <div class = "flex justify-center" ><button id = "button" class = "font text-xxl mr-20 font-semibold"> EDIT </button></div>
+    <div class = "flex justify-center"> 
+        <table width = "1750" class = "font text-xl font-semibold" >
                 <tr class = "border-solid bg-gray-400">
-                    <th > Name </th>
-                    <th > Contact</th>
-                    <th > Rent Fee</th>
-                    <th > Rent Due</th>
-                    <th > Rent Pay Status</th>
+                    <th width = "200" > Name </th>
+                    <th width = "200"> Contact</th>
+                    <th width = "200"> Rent Fee</th>
+                    <th width = "200"> Rent Due</th>
+                    <th width = "200"> Rent Pay Status</th>
+                    <th width = "200"> Water Bill</th>
+                    <th width = "200"> Water Pay Status</th>
+                    <th width = "200"> Electricity Bill</th>
+                    <th width = "200"> Electricity Pay Status</th>
                 </tr>
 
 
                 <% if(data.length > 0){
                     for (var i = 0; i < data.length; i++){
                         %> <tr class = "border-solid">
-                            <td width = "250"><%= data[i].boarderName%></td>
-                            <td width = "250"><%= data[i].boarderContact%></td>
-                            <td width = "250"><%= data[i].boarderRent%></td>
-                            <td width = "250"><%= data[i].boarderRentDue%></td>
-                            <td width = "250"> 
-                                <form action = "" method = "post" >
-                                    <input type = "hidden" name = "index" value = "<%= data[i].id %>">
-                                    <select name = "payStatus">
-                                        <% if (data[i].boarderRentStatus == "Not Paid"){ %> <option value="Not Paid">Not Paid</option> <option value="Paid">Paid </option> <% } %>
-                                        <% if (data[i].boarderRentStatus == "Paid"){ %> <option value="Paid">Paid</option> <option value="Not Paid">Not Paid</option><% } %>
-                                    
-                                </select> <input class = "update" type = "submit"></form>
-                                
-                                </td>
+                            <td width = "150"><%= data[i].boarderName%></td>
+                            <td width = "150"><%= data[i].boarderContact%></td>
+                            <td width = "150"><%= data[i].boarderRent%></td>
+                            <td width = "150"><%= data[i].boarderRentDue%></td>
+                            <td width = "150"><%= data[i].boarderRentStatus%></td>
+                            <td width = "150"><%= data[i].boarderWater%></td>
+                            <td width = "150"><%= data[i].boarderWaterStatus%></td>
+                            <td width = "150"><%= data[i].boarderElect%></td>
+                            <td width = "150"><%= data[i].boarderElectStatus%></td>
+
                             </tr>
-                <%   }
-                }  %> 
+                            <%   }
+            }  %> 
         </table>
     </div>
+
+    <script>
+        const button = document.getElementById("button");
+        
+        button.addEventListener('click', () =>{
+            window.location.href = "edit";
+
+        })
+        
+    </script>
     
 
-        <script>
-            const update = document.querySelector('input.update');
-            
-    
-            update.addEventListener('click', (e) =>{
-                let updateIndex = update.dataset.doc;
-                
-                fetch(updateIndex, {
-                    method: 'POST' 
-                }).then(() =>{ })
-                .catch((err) =>{
-                    console.log(err);
-                })
-            }
-        )
-            
-            
-        </script>
+        
 
     </body>
     </html>
