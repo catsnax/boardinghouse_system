@@ -7,6 +7,7 @@
         border: 2px solid #06296D;
         border-collapse: collapse;
     }
+   
 
 </style>
 
@@ -22,12 +23,12 @@
             <th width = "200"> Rent Fee</th>
             <th width = "200"> Rent Due</th>
             <th width = "200"> Rent Pay Status</th>
-            <th width = "200"> Water Meter</th>
+            <th width = "200"> Water Bill</th>
             <th width = "200"> Water Pay Status</th>
+            <th width = "200"> Electricity Meter</th>
             <th width = "200"> Electricity Bill</th>
             <th width = "250"> Electricity Pay Status</th>
         </tr>
-
 
             <% if(data.length > 0){
                 for (var i = 0; i < data.length; i++){
@@ -44,7 +45,8 @@
                         </td>
 
 
-                        <td width = "200"> <input name = "water" type = "text" value = "<%= data[i].boarderWater %>"></td>
+
+                        <td width = "200">  <%= data[i].boarderWater %> </td>
                         <td width = "200"><select name = "waterStatus">
                                     <% if (data[i].boarderWaterStatus == "Not Paid"){ %> <option value="Not Paid">Not Paid</option> <option value="Paid">Paid </option> <% } %>
                                     <% if (data[i].boarderWaterStatus == "Paid"){ %> <option value="Paid">Paid</option> <option value="Not Paid">Not Paid</option><% } %>  
@@ -52,16 +54,21 @@
 
 
                         <td width = "200"> <input name = "elect" type = "text" value = "<%= data[i].boarderElect %>"></td>
+                        <td width = "200"> <%= data[i].boarderElectPay %></td>
                         <td width = "200"><select name = "electStatus">
                                     <% if (data[i].boarderElectStatus == "Not Paid"){ %> <option value="Not Paid">Not Paid</option> <option value="Paid">Paid </option> <% } %>
                                     <% if (data[i].boarderElectStatus == "Paid"){ %> <option value="Paid">Paid</option> <option value="Not Paid">Not Paid</option><% } %>
-                            </select> <input value = "Update" class = "update" type = "submit">
-                            
+                            </select> 
+                            <input value = "Update" class = "w-20 rounded-xl" type = "submit">
                             <input type = "hidden" name = "index" value = "<%= data[i].id %>">
                             
-                            </form>    
+                        </form>
+                            
+                                
                         </td>
                         </tr>
+
+                    
             <%   }
             }  %> 
     </table>

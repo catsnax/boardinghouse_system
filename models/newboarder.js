@@ -25,6 +25,7 @@ hello = function createNew(name){
         boarderElectPay: Number,
     
     }, {timestamps: true});
+    
     const Boarder = mongoose.model(name, boarderSchema);
 
     return Boarder;

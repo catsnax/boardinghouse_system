@@ -1,4 +1,6 @@
 <%- include('../partials/header.ejs') %>
+<script src="display.js"></script>
+
 
 
 <style>
@@ -9,7 +11,7 @@
     border-collapse: collapse;
 }
 </style>
-
+<div class = "flex justify-center mr-20 font-bold text-4xl" > Print Page </button></div>
 <div class = "flex justify-center mr-20 font-bold text-4xl" > <%= nameString %> </button></div>
 <div class = "flex justify-center text-2xl" ><button id = "button" class = "font text-xxl mr-20 font-semibold"> EDIT </button></div>
 <div class = "flex justify-center" >
@@ -25,8 +27,25 @@
                 <th width = "200"> Rent Pay Status</th>
                 <th width = "200"> Water Bill</th>
                 <th width = "200"> Water Pay Status</th>
+                <th width = "200"> Electricity Meter</th>
                 <th width = "200"> Electricity Bill</th>
                 <th width = "200"> Electricity Pay Status</th>
+            </tr>
+
+            <tr>  
+                <td> All</td>  
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><form action = "#" method = "post"> <input type = "text" name = "water" class = "w-20"> <input type = "submit"> </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>  </form> </td>
+
+
+
             </tr>
 
 
@@ -35,12 +54,13 @@
                     %> <tr class = "border-solid">
                         <td width = "150"><%= data[i].boarderName%></td>
                         <td width = "150"><%= data[i].boarderContact%></td>
-                        <td width = "150"><%= data[i].boarderRent%></td>
+                        <td width = "150">Php <%= data[i].boarderRent%></td>
                         <td width = "150"><%= data[i].boarderRentDue%></td>
                         <td width = "150"><%= data[i].boarderRentStatus%></td>
-                        <td width = "150"><%= data[i].boarderWater%></td>
+                        <td width = "150">Php <%= data[i].boarderWater%></td>
                         <td width = "150"><%= data[i].boarderWaterStatus%></td>
-                        <td width = "150"><%= data[i].boarderElectPay%></td>
+                        <td width = "150"><%= data[i].boarderElect%></td>
+                        <td width = "150">Php <%= data[i].boarderElectPay%></td>
                         <td width = "150"><%= data[i].boarderElectStatus%></td>
                         
 
