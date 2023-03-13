@@ -23,8 +23,8 @@
 
     <div class= "bg-gray-400 h-20 w-4\/5 flex gap-64 pt-4 mb-2 sticky"> 
 
-        <div class = "flex  "> 
-            <img class = "h-12 ml-3 "src="https://img.freepik.com/free-icon/racoon_318-347510.jpg?w=2000" alt="Raccron logo">
+        <div id = "logo"  class = "flex  "> 
+            <img  class = "h-12 ml-3 "src="https://img.freepik.com/free-icon/racoon_318-347510.jpg?w=2000" alt="Raccron logo">
             <div class = "logo text-xl pt-2 pl-1"> Raccron Fullstack</div> 
         </div>
 
@@ -34,9 +34,20 @@
             <a href=""><div class = "font flex gap-1 mb-5"> <img class = "h-8" src="https://cdn.discordapp.com/attachments/870345314815578152/1074882906218041434/wrench-icon-23.png" alt=""> Edit Records</div> </a>
         </div>
 
-        <div class = "font pt-2 text-xl ml-64"> <strong>SIGN IN </strong></div>
+        
 
     </div>
+
+    <script> 
+    logo = document.getElementById('logo');
+    logo.addEventListener('click', () => {
+        window.location.href = "/";
+    })
+    
+    
+    
+    
+    </script>
 
     
 
