@@ -10,7 +10,7 @@ const { redirect } = require('express/lib/response');
 const app = express();
 
 //db URI is from mongoose db. substitute  username and password in template provided
-const dbURI = 'mongodb+srv://CatSnaxx:Aaronisreal4@boarderdatabase.di9lyeh.mongodb.net/boarders?retryWrites=true&w=majority';
+const dbURI = process.env.MONGODB_URI
 
 app.set('view engine', 'ejs');
 app.set('views', 'html-files');
